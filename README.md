@@ -8,22 +8,22 @@ about as long as nine innings.
 
 ![objective](./results/best-model.svg)
 
-|------------|-------------|
-| optimzer   | gp_minimize |
-| estimator  | GBRT        |
-| generator  | sobol       |
-| acquisitor | PI          |
-| wn0        | 0.000015    |
-| wn1        | 0.000029    |
-| wn2        | 0.000045    |
-| wn3        | 0.000072    |
-| wp         | 0.000041    |
-| vs0        | 1.6602      |
-| vs1        | 1.652853    |
-| vs2        | 1.662488    |
-| vs3        | 1.659937    |
-| cost       | 0.021502    |
-|------------|-------------|
+| Description | Value       |
+|-------------|-------------|
+| optimzer    | gp_minimize |
+| estimator   | GBRT        |
+| generator   | sobol       |
+| acquisitor  | PI          |
+| wn0         | 0.000015    |
+| wn1         | 0.000029    |
+| wn2         | 0.000045    |
+| wn3         | 0.000072    |
+| wp          | 0.000041    |
+| vs0         | 1.6602      |
+| vs1         | 1.652853    |
+| vs2         | 1.662488    |
+| vs3         | 1.659937    |
+| cost        | 0.021502    |
 
 See [the report](./report.md) for a detailed comparison of algorithms offered
 by scikit-optimize, on a real world example. 
