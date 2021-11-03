@@ -173,11 +173,12 @@
   :setv ts (get res "ts")
   :setv plot f"./results/{id}-{ts}-objk.svg"
 f"
-<h4 align=\"center\">{id}</h4>\n
+### {id}
 ```
 {(.to-string row)}
 ```\n
 ![{id}]({plot})
+<p align=\"center\">{id}</p>\n
 ")))
 
 (with [f (open "./report.md" "w")]
