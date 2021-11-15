@@ -1,5 +1,5 @@
 results/*.pkl
-results/plots
+results/plots/archive
 results/models
 .installed.cfg
 *.py[cod]
