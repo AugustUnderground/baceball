@@ -190,7 +190,7 @@
                                             "generator" "acquisitor"]) 
                                   values)))
   :setv res (get results id)
-  :setv ts (get res "ts")
+  :setv ts (.join "-" (take 2 (.split (get res "ts") "-"))) ;(get res "ts")
   :setv plot f"./results/plots/st1/{id}-{ts}-objk.svg"
 f"
 ### {id}
