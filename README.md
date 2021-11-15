@@ -4,9 +4,9 @@ Using [Bayesian methods](https://scikit-optimize.github.io/) for hyper
 parameter optimization with [AC²E](https://github.com/matthschw/ace) takes
 about as long as nine innings.
 
-<b align="center">Best Model</b>
+<b align="center">Best Model NAND4</b>
 
-![objective](./results/best-model.svg)
+![objective](./results/plots/nand4/best-model.svg)
 
 | Description | Value       |
 |-------------|-------------|

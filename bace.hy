@@ -152,7 +152,7 @@
         :setv k     (first (.split f "."))
         :setv (, o e g a) (take 4 (.split k "-"))
         :setv id    (.join "-" [o e g a])
-        :setv ts    (.join "-" (drop 4 (.split k "-")))
+        :setv ts    (.join "-" (take 2 (drop 4 (.split k "-"))))
         :setv res   (load f"./results/models/st1/{f}")
         :setv cost  (.item res.fun)
         :setv fmin  (-> res (. x) (np.array))
@@ -170,6 +170,11 @@
       df (pd.DataFrame
             (lfor v (.values results) (+ (get v "row") [(get v "ts")]))
             :columns column-names))
+
+
+(setv (get df "time_stamp") 
+(lfor ts df.time-stamp.values (.join "-" (take 2 (.split ts "-")))))
+
 
 (df.to-csv "./results/st1.csv" :index False)
 
