@@ -23,7 +23,6 @@
       design-parameters ["Wp0" "Wn0" "Wp2" "Wp1" "Wn2" "Wn1"]
       ;performance-parameters ["vs0" "vs1" "vs2" "vs3"]
       performance-parameters ["t_phl" "t_plh" "v_il" "v_ih"]
-      ;performance-parameters ["v_il" "v_ih"]
       ;target (/ (get (ac.current-parameters env) "vdd") 2.0)
       w-min (np.array (list (repeat 0.4e-6 6)))
       w-max (np.array (list (repeat 150e-6 6))))
@@ -96,7 +95,7 @@
 ;
 ;(plot-convergence res) (plt.show) 
 ;(plot-objective res) (plt.show) 
-;(plot-objective res) (plt.savefig "./results/forest_minimize-ET-sobol-LCB.svg") 
+;(plot-objective res) (plt.savefig "./docs/forest_minimize-ET-sobol-LCB.svg") 
 ;(plot-evaluations res) (plt.show) 
 
 (for [s sweep]
@@ -104,8 +103,8 @@
         time-stamp    (-> dt (.now) (.strftime "%H%M%S-%y%m%d"))
         run-name      (.format "{}-{}-{}-{}" optimizer.__name__ 
                                estimator generator acquisitor)
-        model-prefix  (.format "./results/models/st1/{}-{}" run-name time-stamp)
-        plot-prefix   (.format "./results/plots/st1/{}-{}" run-name time-stamp)
+        model-prefix  (.format "./docs/models/st1/{}-{}" run-name time-stamp)
+        plot-prefix   (.format "./docs/plots/st1/{}-{}" run-name time-stamp)
         res-path      (.format "{}-modl.pkl" model-prefix)
         res-conv-path (.format "{}-conv.svg" plot-prefix)
         res-objk-path (.format "{}-objk.svg" plot-prefix)
@@ -147,13 +146,13 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;; LOAD RESULTS ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (setv results 
-  (dfor f (os.listdir "./results/models/st1") 
+  (dfor f (os.listdir "./docs/models/st1") 
         :if         (.endswith f ".pkl")
         :setv k     (first (.split f "."))
         :setv (, o e g a) (take 4 (.split k "-"))
         :setv id    (.join "-" [o e g a])
         :setv ts    (.join "-" (take 2 (drop 4 (.split k "-"))))
-        :setv res   (load f"./results/models/st1/{f}")
+        :setv res   (load f"./docs/models/st1/{f}")
         :setv cost  (.item res.fun)
         :setv fmin  (-> res (. x) (np.array))
         :setv perf  (->> fmin (trigger env) (t-getter) (.values) (list))
@@ -176,7 +175,7 @@
 (lfor ts df.time-stamp.values (.join "-" (take 2 (.split ts "-")))))
 
 
-(df.to-csv "./results/st1.csv" :index False)
+(df.to-csv "./docs/st1.csv" :index False)
 
 (setv best-key (first (list (filter #%(.startswith %1 "gp_minimize-GBRT-sobol-PI") 
                                       (.keys results)))))
@@ -201,7 +200,7 @@ f"
 <p align=\"center\">{id}</p>\n
 ")))
 
-(with [f (open "./results/st1.md" "w")]
+(with [f (open "./docs/st1.md" "w")]
   (f.write 
 f"# Comparison\n
 Detailed comparison of optimization algorithms.
